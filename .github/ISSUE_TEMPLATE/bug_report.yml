@@ -1,0 +1,31 @@
+name: Bug report
+description: Report an observable defect in search, comparison, export, translation or PWA behaviour.
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "請勿在 issue 張貼個人強積金帳戶資料或任何敏感資料。"
+  - type: textarea
+    id: observed
+    attributes:
+      label: 觀察到的情況
+      description: 請描述實際結果。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 預期結果
+    validations:
+      required: true
+  - type: input
+    id: route
+    attributes:
+      label: 頁面網址或路徑
+      placeholder: "/compare?funds=..."
+  - type: dropdown
+    id: environment
+    attributes:
+      label: 裝置與瀏覽器
+      options: ["Desktop Chrome", "Desktop Safari", "Desktop Firefox", "iOS Safari", "Android Chrome", "Other"]

@@ -1,6 +1,6 @@
 {
   "name": "mpf-fund-compare",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "type": "module",
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,8 @@
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
     "lint": "pnpm run check",
-    "test": "node --test tests/data-schema.test.mjs",
+    "test": "tsx --test tests/*.test.mjs tests/*.test.ts",
+    "data:summary": "python3 scripts/describe_data_change.py",
     "format": "prettier --write ."
   },
   "dependencies": {

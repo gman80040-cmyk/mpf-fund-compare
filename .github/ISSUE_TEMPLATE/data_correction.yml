@@ -1,0 +1,27 @@
+name: Public data correction
+description: Report a discrepancy against the MPFA public fund platform.
+title: "data: "
+labels: [data]
+body:
+  - type: markdown
+    attributes:
+      value: "請提供可公開核對的積金局資料來源；不要貼上個人帳戶或持倉資料。"
+  - type: input
+    id: fund-id
+    attributes:
+      label: 積金局基金 ID 或本專案 fund_id
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: 官方來源與資料截至月份
+      description: 請貼上積金局公開頁網址及資料截至月份。
+    validations:
+      required: true
+  - type: textarea
+    id: discrepancy
+    attributes:
+      label: 差異說明
+    validations:
+      required: true

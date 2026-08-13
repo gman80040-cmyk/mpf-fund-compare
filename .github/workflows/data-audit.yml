@@ -1,0 +1,42 @@
+name: Data update audit
+
+on:
+  pull_request:
+    paths:
+      - data/funds.json
+      - client/public/data/funds.json
+      - scripts/**
+      - tests/**
+
+permissions:
+  contents: read
+
+jobs:
+  audit-public-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
+      - name: Verify browser data copy is identical
+        run: cmp data/funds.json client/public/data/funds.json
+      - name: Generate data change summary
+        run: |
+          git show "${{ github.event.pull_request.base.sha }}:data/funds.json" > /tmp/funds-before.json
+          python3 scripts/describe_data_change.py \
+            --before /tmp/funds-before.json \
+            --after data/funds.json \
+            --output data-change-summary.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: data-change-summary
+          path: data-change-summary.md

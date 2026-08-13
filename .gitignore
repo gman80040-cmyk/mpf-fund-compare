@@ -52,6 +52,11 @@ coverage/
 # nyc test coverage
 .nyc_output
 
+# Playwright browser-test artifacts
+test-results/
+playwright-report/
+blob-report/
+
 # Dependency directories
 jspm_packages/
 

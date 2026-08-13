@@ -13,9 +13,10 @@
 | 搜尋與篩選 | 中英文基金名稱、供應商、基金計劃；股票、債券、混合、貨幣市場、保證及 DIS 核心分類，可按積金局基金資訊表的中英文**基金細分類**縮窄結果，並以網址分享篩選條件。 |
 | 基金資料頁 | 1 年／3 年／5 年年率化回報、FER、風險級別、推出日期與同類 5 年排名。 |
 | 同類比較 | 以相同資產大類的 5 年年率化回報排序；資料摘要只描述名次與相對 FER，不作推薦。 |
-| 比較與匯出 | 選取最多 3 隻基金，顯示指標表、Chart.js 回報曲線與 FER 長條圖；可切換資產類別／細分類同儕基準，下載比較或完整結果 CSV，亦支援 `?funds=mpfa-878,mpfa-875` 分享網址。 |
+| 比較與匯出 | 選取最多 3 隻基金，顯示指標表、Chart.js 回報曲線與 FER 長條圖；可切換資產類別／細分類同儕基準，下載 CSV 或列印含資料月份、比較表與免責聲明的比較摘要，亦支援 `?funds=mpfa-878,mpfa-875` 分享網址。 |
 | 新手傻瓜包 | 繁中／English 的 6 步閱讀路線，說明如何核對計劃、比較同類基金、閱讀回報／FER／風險、查閱 KSID 與基金便覽，以及認識 DIS 的非保本性質；不提供個別基金推薦。[2] [3] [4] |
-| 資料透明度 | 首頁與新手頁列出資料月份、雙語基金記錄數、最新基線快照及每月核對流程連結，清楚區分資料快照與即時報價。 |
+| 術語與常見問題 | 雙語小詞典解釋年率化回報、FER、風險級別、同類排名、基金便覽、DIS 與資料月份；常見問題明確說明單一欄目不等於推薦。[1] [3] [4] |
+| 資料透明度 | 首頁與新手頁列出資料月份、雙語基金記錄數、最新基線快照及每月核對流程連結；「資料版本紀錄」頁保留資料發布、差異摘要與 PR 審核脈絡，清楚區分資料快照與即時報價。 |
 | 語言與裝置 | 繁體中文及 English 切換；手機優先的響應式布局。 |
 | PWA | Web manifest、離線 service worker、可安裝圖示及無網絡時的已快取資料。 |
 
@@ -67,7 +68,7 @@ pnpm dev
 | `pnpm dev` | 啟動本機開發伺服器。 |
 | `pnpm run lint` | 執行 TypeScript 型別檢查。 |
 | `pnpm test` | 驗證 `funds.json` 的欄位、雙語資料、數值範圍與唯一識別碼。 |
-| `pnpm run test:e2e` | 使用 Playwright／Chromium 驗證新手教學、基金搜尋與分享、比較籃的瀏覽器流程。首次執行前請執行 `pnpm exec playwright install chromium`。 |
+| `pnpm run test:e2e` | 使用 Playwright／Chromium 驗證新手教學、術語與資料版本頁、基金搜尋與分享、比較籃及列印摘要的瀏覽器流程。首次執行前請執行 `pnpm exec playwright install chromium`。 |
 | `pnpm run test:all` | 依序執行資料／工具單元測試及端對端測試。 |
 | `pnpm run build` | 產生可部署的純靜態網站至 `dist/public`。 |
 
@@ -88,7 +89,7 @@ pnpm test
 
 轉換器刻意不發出網絡請求，避免把一次性的公開資料快照誤稱為實時數據。提交更新前，請確認資料月份、官方欄位次序及 `pnpm test` 均通過。
 
-每月維護應保留人手核對步驟：先檢查官方資料截至月份與中英文列是否匹配，再轉換、測試、檢視差異和提交。不要把這個流程描述為自動或實時更新。完整核對順序見 [`docs/monthly-update-checklist.md`](docs/monthly-update-checklist.md)；`scripts/describe_data_change.py` 可產生新增、移除與變更基金的摘要，供 Pull Request 審核。
+每月維護應保留人手核對步驟：先檢查官方資料截至月份與中英文列是否匹配，再轉換、測試、檢視差異和提交。不要把這個流程描述為自動或實時更新。完整核對順序見 [`docs/monthly-update-checklist.md`](docs/monthly-update-checklist.md)；`scripts/describe_data_change.py` 可產生新增、移除與變更基金的摘要，供 Pull Request 審核。每次資料更新亦應新增 `docs/data-changelog/YYYY-MM.md` 並在 PR 連結，讓網站「資料版本紀錄」與 repository 審核資料維持一致。
 
 ## GitHub Pages 部署
 

@@ -9,7 +9,10 @@
 | 3 | 將 `data/funds.json` 同步至 `client/public/data/funds.json`。 | 兩份 JSON 二進位內容一致。 |
 | 4 | 使用 `scripts/describe_data_change.py` 比較上一快照與新快照。 | 差異摘要清楚列出新增、移除及變更基金。 |
 | 5 | 執行 `pnpm test && pnpm run lint && pnpm run build`。 | 所有檢查通過，再建立 Pull Request。 |
-| 6 | 在 PR 填寫資料月份、官方來源及人手核對結果。 | 合併後由 Pages workflow 發布。 |
+| 6 | 在 `docs/data-changelog/YYYY-MM.md` 記錄資料月份、快照範圍與差異摘要。 | 版本紀錄可由網站的「資料版本紀錄」頁及 repository 追溯。 |
+| 7 | 在 PR 填寫資料月份、官方來源、人手核對結果及版本紀錄連結。 | 必須通過 `validate` 並符合分支審核規則；排程不會直接推送或發布資料。 |
+
+> 每月任務只負責資料核對、差異摘要及提醒建立 PR；它不會自行修改 `main`、推送資料或發布 GitHub Pages。
 
 ```bash
 python3 scripts/describe_data_change.py \

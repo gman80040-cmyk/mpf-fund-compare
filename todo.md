@@ -27,3 +27,8 @@
 - [ ] 使用已加入的 repository deploy key 驗證 SSH 連線並推送 `main`。
 - [ ] 使用 deploy key 推送 `main` 並驗證 GitHub Pages workflow。
 - [ ] 在 Pages 已啟用後重新觸發部署並核對公開網址與 HTTPS 狀態。
+- [x] 設計並實作繁中／英文 MPF 傻瓜包新手教學與入口。
+- [x] 在基金詳情加入可複製的分享網址。
+- [x] 在網站內加入資料版本與近期變更摘要介面。
+- [x] 建立主要搜尋、詳情與比較流程的端對端測試。
+- [ ] 以 feature branch、Pull Request、審核及 CI 驗證交付本輪功能。

@@ -14,6 +14,8 @@
 | 基金資料頁 | 1 年／3 年／5 年年率化回報、FER、風險級別、推出日期與同類 5 年排名。 |
 | 同類比較 | 以相同資產大類的 5 年年率化回報排序；資料摘要只描述名次與相對 FER，不作推薦。 |
 | 比較與匯出 | 選取最多 3 隻基金，顯示指標表、Chart.js 回報曲線與 FER 長條圖；可切換資產類別／細分類同儕基準，下載比較或完整結果 CSV，亦支援 `?funds=mpfa-878,mpfa-875` 分享網址。 |
+| 新手傻瓜包 | 繁中／English 的 6 步閱讀路線，說明如何核對計劃、比較同類基金、閱讀回報／FER／風險、查閱 KSID 與基金便覽，以及認識 DIS 的非保本性質；不提供個別基金推薦。[2] [3] [4] |
+| 資料透明度 | 首頁與新手頁列出資料月份、雙語基金記錄數、最新基線快照及每月核對流程連結，清楚區分資料快照與即時報價。 |
 | 語言與裝置 | 繁體中文及 English 切換；手機優先的響應式布局。 |
 | PWA | Web manifest、離線 service worker、可安裝圖示及無網絡時的已快取資料。 |
 
@@ -65,6 +67,8 @@ pnpm dev
 | `pnpm dev` | 啟動本機開發伺服器。 |
 | `pnpm run lint` | 執行 TypeScript 型別檢查。 |
 | `pnpm test` | 驗證 `funds.json` 的欄位、雙語資料、數值範圍與唯一識別碼。 |
+| `pnpm run test:e2e` | 使用 Playwright／Chromium 驗證新手教學、基金搜尋與分享、比較籃的瀏覽器流程。首次執行前請執行 `pnpm exec playwright install chromium`。 |
+| `pnpm run test:all` | 依序執行資料／工具單元測試及端對端測試。 |
 | `pnpm run build` | 產生可部署的純靜態網站至 `dist/public`。 |
 
 ## 更新基金資料
@@ -88,7 +92,7 @@ pnpm test
 
 ## GitHub Pages 部署
 
-推送至 `main` 後，`.github/workflows/ci.yml` 會執行 lint、資料 schema 測試及靜態建置；`.github/workflows/deploy-pages.yml` 則把 `dist/public` 部署至 GitHub Pages。首次使用時，請在 repository **Settings → Pages** 將 Source 設為 **GitHub Actions**。
+所有改動應透過 Pull Request 合併至受保護的 `main`。`.github/workflows/ci.yml` 的 `validate` 工作會執行 lint、資料 schema 測試、靜態建置及 Playwright Chromium 端對端測試；`.github/workflows/deploy-pages.yml` 則把 `dist/public` 部署至 GitHub Pages。首次使用時，請在 repository **Settings → Pages** 將 Source 設為 **GitHub Actions**。
 
 Vite 的 GitHub Actions 建置基底已設為 `/mpf-fund-compare/`。如 fork 後改名，請同步修改 `vite.config.ts` 的 `base` 值，確保靜態資產和 PWA 深連結能正確定位。
 
@@ -103,3 +107,6 @@ Vite 的 GitHub Actions 建置基底已設為 `/mpf-fund-compare/`。如 fork �
 ## References
 
 [1]: https://mfp.mpfa.org.hk/mobile/tch/mpp_list.jsp "積金局強積金基金平台：基金資訊表"
+[2]: https://www.mpfa.org.hk/en/info-centre/publications-articles/mpfa-articles/2024_9_25 "MPFA: Made-easy guide book for the MPF"
+[3]: https://www.ifec.org.hk/web/tc/young-adults/youth-investment/5-steps-mpf-funds.page "投委會：揀選強積金基金 5 個步驟"
+[4]: https://www.mpfa.org.hk/en/mpf-investment/portfolio/default-investment-strategy "MPFA: Default Investment Strategy"

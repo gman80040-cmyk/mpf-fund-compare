@@ -18,3 +18,11 @@
 - [x] 完成建置與介面驗證，保存交付快照。
 - [ ] 建立／推送 GitHub repository 並啟用 GitHub Pages。
 - [ ] 建立每月資料更新提醒或排程，交付發布網址與維護狀態。
+- [ ] 重新驗證 GitHub 授權的 repository 內容讀寫範圍與遠端可達性。
+- [ ] 推送已優化的 `main` 分支並驗證 GitHub Pages workflow。
+- [x] 建立每月可審核的資料更新提醒或任務。
+- [x] 於每月 1 日執行公開資料核對、差異摘要與測試，並提交審核結果供使用者決定是否發布。
+- [ ] 設定 `main` 分支保護與合併前品質檢查規則。
+- [ ] 產生 repository 專用 SSH deploy key，供使用者在 GitHub repository 設定寫入權限。
+- [ ] 使用已加入的 repository deploy key 驗證 SSH 連線並推送 `main`。
+- [ ] 使用 deploy key 推送 `main` 並驗證 GitHub Pages workflow。

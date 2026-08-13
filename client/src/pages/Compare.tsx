@@ -1,11 +1,11 @@
 /**
  * 港島理財報章：比較頁把同一組數據當作「可刊登的比較圖表」，每一圖均附基準與資料月份。
  */
-import { ArrowLeft, Trash2 } from "lucide-react";
+import { ArrowLeft, Download, Trash2 } from "lucide-react";
 import { Link } from "wouter";
 import { Footer, Header } from "@/components/SiteFrame";
 import { FerChart, ReturnChart } from "@/components/FundCharts";
-import { assetLabels, copy, formatFer, formatPercent, getPeerRank, useFunds } from "@/lib/funds";
+import { assetLabels, copy, downloadComparisonCsv, formatFer, formatPercent, getPeerRank, useFunds } from "@/lib/funds";
 import { useLocale } from "@/contexts/LocaleContext";
 import "@/styles/register.css";
 const selectionKey = "mpf-compare-selection";
@@ -15,7 +15,7 @@ export default function Compare() {
   const remove = (id: string) => { localStorage.setItem(selectionKey, JSON.stringify(ids.filter((fundId) => fundId !== id))); window.location.reload(); };
   const context = locale === "en" ? `Peer-group data · annualised returns and latest FER · data ${document?.as_of || "—"}` : `同類比較資料 · 年率化回報及最近期 FER · 數據截至 ${document?.as_of || "—"}`;
   if (loading) return <div className="page-shell"><Header /><main className="frame page-loading">Loading comparison…</main></div>;
-  return <div className="min-h-screen page-shell"><Header asOf={document?.as_of} selectedCount={funds.length} /><main className="frame compare-page"><Link href="/" className="back-link"><ArrowLeft size={15} />{t.back}</Link><section className="compare-heading"><div><p className="eyebrow">05 / {t.comparison}</p><h1>{locale === "en" ? "A fairer way to place numbers side by side." : "把數字放回同一張資料表。"}</h1></div><aside className="results-context"><strong>{locale === "en" ? "Editorial context" : "資料脈絡"}</strong><p>{context}</p><p>{t.noRecommendation}</p></aside></section>
+  return <div className="min-h-screen page-shell"><Header asOf={document?.as_of} selectedCount={funds.length} /><main className="frame compare-page"><Link href="/" className="back-link"><ArrowLeft size={15} />{t.back}</Link><section className="compare-heading"><div><p className="eyebrow">05 / {t.comparison}</p><h1>{locale === "en" ? "A fairer way to place numbers side by side." : "把數字放回同一張資料表。"}</h1>{funds.length ? <button className="csv-export" onClick={() => downloadComparisonCsv(funds, document!.funds, locale)}><Download size={15} />{t.exportCsv}</button> : null}</div><aside className="results-context"><strong>{locale === "en" ? "Editorial context" : "資料脈絡"}</strong><p>{context}</p><p>{t.noRecommendation}</p></aside></section>
     {!funds.length ? <div className="empty-state compare-empty"><p>{t.emptyCompare}</p><Link href="/" className="primary-action">{t.home}</Link></div> : <><section className="comparison-table-wrap"><table className="comparison-table"><caption>{context}</caption><thead><tr><th>{locale === "en" ? "Fund" : "基金"}</th>{funds.map((fund) => <th key={fund.fund_id}><span>{fund.provider}</span>{fund.name[locale]}<button onClick={() => remove(fund.fund_id)} aria-label={t.remove}><Trash2 size={14} /></button></th>)}</tr></thead><tbody><tr><td>{t.category}</td>{funds.map((fund) => <td key={fund.fund_id}>{assetLabels[fund.asset_class][locale]}</td>)}</tr><tr><td>{t.return1}</td>{funds.map((fund) => <td className="performance-number" key={fund.fund_id}>{formatPercent(fund.returns.one_year)}</td>)}</tr><tr><td>{t.return3}</td>{funds.map((fund) => <td className="performance-number" key={fund.fund_id}>{formatPercent(fund.returns.three_year)}</td>)}</tr><tr className="highlight-row"><td>{t.return5}</td>{funds.map((fund) => <td className="performance-number" key={fund.fund_id}>{formatPercent(fund.returns.five_year)}</td>)}</tr><tr><td>{t.fer}</td>{funds.map((fund) => <td key={fund.fund_id}>{formatFer(fund.fer)}</td>)}</tr><tr><td>{t.risk}</td>{funds.map((fund) => <td key={fund.fund_id}>{fund.risk_level} / 6</td>)}</tr><tr><td>{t.rank}</td>{funds.map((fund) => { const rank = getPeerRank(fund, document!.funds); return <td key={fund.fund_id}>{rank.rank} / {rank.total}</td>; })}</tr></tbody></table></section><section className="chart-grid"><div className="chart-panel"><p className="eyebrow">06 / {t.returnChart}</p><p className="chart-context">{context}</p><ReturnChart funds={funds} locale={locale} /></div><div className="chart-panel"><p className="eyebrow">07 / {t.ferChart}</p><p className="chart-context">{context}</p><FerChart funds={funds} locale={locale} /></div></section></>}
   </main><Footer asOf={document?.as_of} /></div>;
 }

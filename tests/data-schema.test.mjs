@@ -20,6 +20,7 @@ test("every fund contains complete bilingual and auditable fields", () => {
     assert.ok(!ids.has(fund.fund_id), `duplicate fund_id: ${fund.fund_id}`); ids.add(fund.fund_id);
     assert.ok(fund.name["zh-Hant"].trim() && fund.name.en.trim(), `${fund.fund_id} lacks bilingual name`);
     assert.ok(fund.scheme["zh-Hant"].trim() && fund.scheme.en.trim(), `${fund.fund_id} lacks bilingual scheme`);
+    assert.ok(fund.asset_category["zh-Hant"].trim() && fund.asset_category.en.trim(), `${fund.fund_id} lacks bilingual asset subcategory`);
     assert.ok(assetClasses.has(fund.asset_class), `${fund.fund_id} uses an unknown asset class`);
     assert.match(fund.inception_date, /^\d{4}-\d{2}-\d{2}$/);
     assert.equal(fund.as_of, document.as_of);

@@ -5,10 +5,12 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
-    "start": "NODE_ENV=production node dist/index.js",
+    "build": "vite build",
+    "start": "vite preview --host",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
+    "lint": "pnpm run check",
+    "test": "node --test tests/data-schema.test.mjs",
     "format": "prettier --write ."
   },
   "dependencies": {

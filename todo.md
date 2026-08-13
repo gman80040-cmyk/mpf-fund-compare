@@ -26,3 +26,4 @@
 - [ ] 產生 repository 專用 SSH deploy key，供使用者在 GitHub repository 設定寫入權限。
 - [ ] 使用已加入的 repository deploy key 驗證 SSH 連線並推送 `main`。
 - [ ] 使用 deploy key 推送 `main` 並驗證 GitHub Pages workflow。
+- [ ] 在 Pages 已啟用後重新觸發部署並核對公開網址與 HTTPS 狀態。

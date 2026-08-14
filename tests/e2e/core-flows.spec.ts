@@ -38,6 +38,13 @@ test("glossary search matches English aliases and handles no-result recovery", a
   await expect(page.locator(".term-entry")).toHaveCount(8);
 });
 
+test("SPA route recovery preserves the GitHub Pages repository base", async ({ page }) => {
+  await page.addInitScript(() => sessionStorage.setItem("mpf-spa-route", "/glossary"));
+  await page.goto(`${siteBase}/`);
+  await expect(page).toHaveURL(new RegExp(`${siteBase || ""}/glossary$`));
+  await expect(page.getByRole("searchbox", { name: "搜尋術語" })).toBeVisible();
+});
+
 test("search leads to a shareable data sheet rather than a recommendation", async ({ page, context }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.goto(`${siteBase}/`);

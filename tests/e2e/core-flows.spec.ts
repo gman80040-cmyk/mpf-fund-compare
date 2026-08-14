@@ -24,6 +24,20 @@ test("glossary and dataset history retain a source-led, non-recommendation readi
   await expect(page.getByText("公開流程 · 不自動發布")).toBeVisible();
 });
 
+test("glossary search matches English aliases and handles no-result recovery", async ({ page }) => {
+  await page.goto(`${siteBase}/`);
+  await page.getByRole("link", { name: "新手傻瓜包" }).click();
+  await page.getByRole("link", { name: "MPF 術語小詞典與常見問題" }).click();
+  const search = page.getByRole("searchbox", { name: "搜尋術語" });
+  await search.fill("fund expense");
+  await expect(page.getByRole("heading", { name: "基金開支比率（FER）" })).toBeVisible();
+  await expect(page.locator(".term-entry")).toHaveCount(1);
+  await search.fill("not-a-real-mpf-term");
+  await expect(page.getByRole("heading", { name: "找不到相關術語" })).toBeVisible();
+  await page.locator(".glossary-empty").getByRole("button", { name: "清除搜尋" }).click();
+  await expect(page.locator(".term-entry")).toHaveCount(8);
+});
+
 test("search leads to a shareable data sheet rather than a recommendation", async ({ page, context }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.goto(`${siteBase}/`);

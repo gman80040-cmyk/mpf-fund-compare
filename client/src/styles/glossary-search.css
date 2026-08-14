@@ -1,0 +1,15 @@
+/** 港島理財報章：術語搜尋列採資料索引語言、欄線與暖白紙張，讓查找功能融入詞典而非變成儀表板元件。 */
+.glossary-search{margin:0 0 1.5rem;padding:1rem 1.1rem 1.05rem;border-top:2px solid var(--green);border-bottom:1px solid var(--rule);background:repeating-linear-gradient(90deg,rgba(18,60,52,.045) 0,rgba(18,60,52,.045) 1px,transparent 1px,transparent 25%)}
+.glossary-search>label{display:block;margin-bottom:.55rem;font-family:ui-monospace,monospace;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.glossary-search-field{display:flex;align-items:center;gap:.65rem;padding:.25rem .4rem .25rem .75rem;border:1px solid var(--green);background:#fffdf8;color:var(--teal)}
+.glossary-search-field:focus-within{outline:3px solid rgba(35,126,111,.22);outline-offset:2px}
+.glossary-search-field input{min-width:0;flex:1;border:0;background:transparent;color:var(--green);font:inherit;line-height:2}
+.glossary-search-field input:focus{outline:0}.glossary-search-field input::placeholder{color:#74817b}
+.glossary-search-field button,.glossary-empty button{display:inline-grid;place-items:center;border:0;background:transparent;color:var(--green);cursor:pointer}
+.glossary-search-field button{width:2rem;height:2rem}.glossary-search-field button:hover,.glossary-empty button:hover{text-decoration:underline}
+.glossary-search-meta{display:flex;justify-content:space-between;gap:1rem;margin-top:.65rem;font-family:ui-monospace,monospace;font-size:.7rem;line-height:1.5}
+.glossary-search-meta p{margin:0;color:var(--muted)}.glossary-search-meta p:last-child{color:var(--teal);font-weight:800;white-space:nowrap}
+.glossary-empty{padding:2.5rem 1.25rem;border-top:2px solid var(--green);border-bottom:1px solid var(--rule);background:rgba(255,253,248,.55);color:var(--muted)}
+.glossary-empty svg{color:var(--teal)}.glossary-empty h3{margin:.75rem 0 .25rem;font-family:"Noto Serif TC",serif;font-size:1.4rem;color:var(--green)}
+.glossary-empty p{max-width:52ch;margin:0;line-height:1.65}.glossary-empty button{margin-top:.9rem;padding:0;border-bottom:1px solid var(--teal);font-weight:800}
+@media (max-width:760px){.glossary-search{margin-bottom:1.25rem;padding:.9rem}.glossary-search-meta{display:block}.glossary-search-meta p:last-child{margin-top:.3rem;white-space:normal}}

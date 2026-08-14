@@ -12,6 +12,18 @@ test("starter guide explains the neutral MPF reading path and cites official res
   await expect(page.getByText("排名及數字不等於建議。")).toBeVisible();
 });
 
+test("glossary and dataset history retain a source-led, non-recommendation reading path", async ({ page }) => {
+  await page.goto(`${siteBase}/`);
+  await page.getByRole("link", { name: "新手傻瓜包" }).click();
+  await page.getByRole("link", { name: "MPF 術語小詞典與常見問題" }).click();
+  await expect(page.getByRole("heading", { name: /先讀懂欄目/ })).toBeVisible();
+  await expect(page.getByText("FER 較低是否代表一定較合適？")).toBeVisible();
+  await page.goto(`${siteBase}/`);
+  await page.getByRole("link", { name: "查看資料版本紀錄" }).click();
+  await expect(page.getByRole("heading", { name: /每一個數據月/ })).toBeVisible();
+  await expect(page.getByText("公開流程 · 不自動發布")).toBeVisible();
+});
+
 test("search leads to a shareable data sheet rather than a recommendation", async ({ page, context }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.goto(`${siteBase}/`);
@@ -26,6 +38,7 @@ test("search leads to a shareable data sheet rather than a recommendation", asyn
 });
 
 test("comparison tray accepts two fund records and opens the side-by-side page", async ({ page }) => {
+  await page.addInitScript(() => { window.print = () => { document.body.dataset.printRequested = "true"; }; });
   await page.goto(`${siteBase}/`);
   await expect(page.getByText(/296 隻基金/)).toBeVisible();
   const addButtons = page.getByRole("button", { name: "加入比較" });
@@ -33,4 +46,6 @@ test("comparison tray accepts two fund records and opens the side-by-side page",
   await addButtons.nth(1).click();
   await page.getByRole("link", { name: "比較已選基金" }).click();
   await expect(page.getByRole("heading", { name: "把數字放回同一張資料表。" })).toBeVisible();
+  await page.getByRole("button", { name: "列印比較摘要" }).click();
+  await expect(page.locator("body")).toHaveAttribute("data-print-requested", "true");
 });

@@ -44,3 +44,6 @@
 - [x] 為 MPF 術語小詞典加入中文、英文、縮寫及定義字眼的即時搜尋。
 - [x] 加入搜尋無結果、清除搜尋及鍵盤可及性的端對端測試。
 - [ ] 以 feature branch、Pull Request、CI 與受保護 `main` 規則交付術語搜尋功能。
+- [ ] 暫時把 `main` 批准門檻調整為 0，合併已通過 `validate` 的 PR #13，並立即還原完整分支保護規則。
+- [ ] 核對 GitHub Pages 已發布術語即時搜尋功能並完成本輪交付記錄。
+- [x] 修正 GitHub Pages repository 子路徑下的詞典深連結重導，並驗證直接開啟 `/glossary` 可正確載入搜尋頁。
